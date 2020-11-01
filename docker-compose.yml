@@ -1,0 +1,12 @@
+version: '2.4'
+services:
+  bot:
+    restart: on-failure
+    build:
+      context: '.'
+    ports:
+      - '6000:5000'
+    volumes:
+      - sessions:/app/.sessions
+volumes:
+  sessions:
