@@ -140,14 +140,22 @@ async function generate(context, reason) {
     await page.type('#field-city', context.state.details.city);
     await page.type('#field-zipcode', context.state.details.zipcode);
 
+    // Ew fix for timezone... no i cant be bothered to fix it properly
+    let hours = now.getHours() + 1;
+    let date = now.getDate();
+    if (hours > 23) {
+      hours = hours - 23;
+      date++;
+    }
+
     await page.evaluate((s) => {
       // eslint-disable-next-line no-undef
       document.querySelector('#field-datesortie').value = s;
-    }, `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`);
+    }, `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(date)}`);
     await page.evaluate((s) => {
       // eslint-disable-next-line no-undef
       document.querySelector('#field-heuresortie').value = s;
-    }, `${pad(now.getHours() + 1)}:${pad(now.getMinutes())}`);
+    }, `${pad(hours)}:${pad(now.getMinutes())}`);
 
     await page.click(`input[type='checkbox'][value='${reason}']`);
     await page.click('#generate-btn');
