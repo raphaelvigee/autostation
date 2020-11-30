@@ -205,20 +205,21 @@ async function generate(context, reason) {
 const hiTriggers = ['hi', 'hello'];
 const resetTriggers = ['reset', 'forget'];
 const fillTriggers = ['fill'];
-const derogationTriggers = ['please', 'gimme', 'derogation'];
+const derogationTriggers = ['please', 'gimme', 'derogation', 'attestation'];
 
 async function handleHi(context) {
   await context.sendText(`Hi!`);
   await help(context);
 }
 
+// [...document.querySelectorAll('form input[type="checkbox"]')].map(n => n.value)
 const reasonTxtToReason = {
   travail: 'travail',
-  achats: 'achats',
+  achats: 'achats_culturel_cultuel',
+  culture: 'achats_culturel_cultuel',
   sante: 'sante',
   famille: 'famille',
   handicap: 'handicap',
-  sport_animaux: 'sport_animaux',
   sport: 'sport_animaux',
   animaux: 'sport_animaux',
   convocation: 'convocation',
